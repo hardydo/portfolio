@@ -1,0 +1,172 @@
+/* Timings here are paired with the constants in ./index.ts. */
+.boot {
+  display: none;
+}
+.is-booting {
+  overflow: hidden;
+}
+
+.is-booting .boot {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background:
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 60%), var(--bg);
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s;
+}
+.is-boot-leaving .boot {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.boot__window {
+  width: min(640px, 100%);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 60%, #000);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 60px color-mix(in srgb, var(--accent) 8%, transparent);
+  animation: boot-enter 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.boot__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.boot__bar > span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.boot__bar > span:nth-child(1) {
+  background: #ff5f57;
+}
+.boot__bar > span:nth-child(2) {
+  background: #febc2e;
+}
+.boot__bar > span:nth-child(3) {
+  background: #28c840;
+}
+.boot__title {
+  flex: 1;
+  margin: 0 52px 0 0;
+  text-align: center;
+  font: 500 12px var(--mono);
+  color: var(--muted);
+}
+
+.boot__log {
+  height: 360px;
+  overflow: hidden;
+  margin: 0;
+  padding: 18px 20px 8px;
+  font: 13px/1.75 var(--mono);
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+.boot__line {
+  display: block;
+  animation: boot-line 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.boot__line--after-typing {
+  animation-delay: 1.2s;
+}
+/* "npm run start" is 13 characters; one step per character reads as typing. */
+.boot__typed {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: boot-type 0.75s steps(13, end) 0.4s forwards;
+}
+.boot__name {
+  display: inline-block;
+  min-width: 14ch;
+  margin-right: 1ch;
+}
+.boot__ok {
+  color: var(--ok);
+}
+.boot__dim {
+  color: var(--muted);
+}
+.boot__accent {
+  color: var(--accent);
+}
+.boot__cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  background: var(--ink);
+  animation: boot-blink 1s steps(1) infinite;
+}
+
+.boot__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  padding: 10px 20px 16px;
+  font: 12px var(--mono);
+  color: var(--muted);
+}
+.boot__meter {
+  color: var(--accent);
+  white-space: pre;
+}
+
+.is-boot-quick .boot__typed {
+  animation-duration: 0.25s;
+  animation-delay: 0s;
+}
+.is-boot-quick .boot__line--after-typing {
+  animation-delay: 0.3s;
+}
+
+@keyframes boot-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+@keyframes boot-type {
+  to {
+    width: 13ch;
+  }
+}
+@keyframes boot-line {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+}
+@keyframes boot-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .boot__log {
+    height: 320px;
+    padding: 14px 14px 6px;
+    font-size: 11.5px;
+  }
+  .boot__footer {
+    padding: 8px 14px 14px;
+    font-size: 11px;
+  }
+}

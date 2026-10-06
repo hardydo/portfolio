@@ -1,0 +1,21 @@
+/* Shared by several sections, so owned by none of them. */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Stands in for a technology logo that Simple Icons does not have; see src/lib/tech-icons.ts. */
+.tech-fallback {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--line);
+  font-size: 10px;
+  font-weight: 700;
+}

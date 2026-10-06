@@ -1,0 +1,127 @@
+.experience__timeline {
+  --period: 170px;
+  position: relative;
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+}
+.experience__timeline::before,
+.experience__progress {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 56px;
+  width: 1px;
+  left: calc(var(--period) + 28px);
+}
+.experience__timeline::before {
+  background: var(--line);
+}
+.experience__progress {
+  background: linear-gradient(var(--accent), var(--accent-deep));
+  transform-origin: top;
+  transform: scaleY(0);
+}
+.experience__role {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--period) 1fr;
+  column-gap: 72px;
+  padding-bottom: 56px;
+}
+.experience__role::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: calc(var(--period) + 22px);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  transition:
+    background 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.experience__role.is-reached::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.experience__period {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.experience__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.experience__company {
+  margin: 4px 0 14px;
+  font-size: 15px;
+  color: var(--accent);
+}
+.experience__summary {
+  margin: 0 0 14px;
+  max-width: 62ch;
+}
+.experience__highlights {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 18px;
+  padding-left: 18px;
+  max-width: 62ch;
+  color: var(--muted);
+}
+.experience__highlights li::marker {
+  color: var(--accent);
+}
+.experience__stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.experience__stack li {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.experience__stack svg,
+.experience__stack .tech-fallback {
+  width: 18px;
+  height: 18px;
+  fill: var(--brand);
+}
+
+@media (max-width: 720px) {
+  .experience__timeline {
+    --period: 0px;
+  }
+  .experience__timeline::before,
+  .experience__progress {
+    left: 6px;
+  }
+  .experience__role {
+    grid-template-columns: 1fr;
+    padding-left: 36px;
+  }
+  .experience__role::before {
+    left: 0;
+  }
+  .experience__period {
+    margin-bottom: 6px;
+  }
+}

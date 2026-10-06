@@ -1,0 +1,4 @@
+/* Each section's own stylesheet rearranges its layout under .no-webgl; this only removes the empty 3D boxes. */
+.no-webgl .view {
+  display: none;
+}

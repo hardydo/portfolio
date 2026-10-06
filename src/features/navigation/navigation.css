@@ -1,0 +1,164 @@
+/* Three columns with equal outer tracks keep the nav pill centred whatever the brand and button widths are. */
+.topbar {
+  position: fixed;
+  inset: 16px var(--gutter) auto;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px 24px;
+  pointer-events: none;
+}
+.topbar > * {
+  pointer-events: auto;
+}
+.brand {
+  justify-self: start;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.brand span {
+  color: var(--accent);
+}
+.topbar > .btn {
+  justify-self: end;
+}
+
+.topnav {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.topnav::-webkit-scrollbar {
+  display: none;
+}
+.topnav a {
+  flex: none;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.topnav__icon {
+  display: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.topnav a:hover {
+  background: color-mix(in srgb, var(--ink) 9%, transparent);
+  color: var(--ink);
+}
+.topnav a.is-active {
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--ink) 35%, transparent);
+}
+/* The nav scrolls horizontally on narrow screens, so an outset outline would be clipped. */
+.topnav a:focus-visible {
+  outline-offset: -3px;
+}
+
+/* Below 1080px the pill no longer fits beside brand and button: it docks to the bottom edge within thumb
+   reach and shows icons only; each text label becomes the icon's tooltip. */
+@media (max-width: 1080px) {
+  :root {
+    --dock-space: calc(62px + env(safe-area-inset-bottom));
+  }
+  .topbar {
+    inset: 12px var(--gutter) auto;
+    grid-template-columns: 1fr auto;
+  }
+  .topnav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: fit-content;
+    max-width: calc(100% - var(--gutter) * 2);
+    margin-inline: auto;
+    gap: 2px;
+    padding: 4px;
+    /* The icons always fit, and a scrolling pill would clip the tooltips above it. */
+    overflow: visible;
+  }
+  .topnav a {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 11px 12px;
+  }
+  .topnav__icon {
+    display: block;
+  }
+  /* Transparent rather than hidden, so the label still names the link for screen readers. */
+  .topnav__label {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 13px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    pointer-events: none;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+  .topnav__label::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 5px solid transparent;
+    border-top-color: var(--ink);
+    transform: translateX(-50%);
+  }
+  .topnav a:focus-visible .topnav__label {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Touch screens get no hover, so a tap navigates without leaving a tooltip stuck on screen. */
+@media (max-width: 1080px) and (hover: hover) {
+  .topnav a:hover .topnav__label {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Smallest phones: tighter icons so all seven still fit without scrolling. */
+@media (max-width: 360px) {
+  .topnav a {
+    padding: 10px 9px;
+  }
+}

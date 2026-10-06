@@ -1,0 +1,52 @@
+.eyebrow {
+  margin: 0 0 20px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+/* Bottom padding keeps descenders (g, y, p) from being clipped by tight line-height. */
+.display,
+.title {
+  font-family: var(--serif);
+  font-weight: 500;
+  padding-bottom: 0.08em;
+}
+.display {
+  font-size: clamp(46px, 7vw, 104px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin: 0 0 26px;
+}
+.display em {
+  font-style: italic;
+  padding-right: 0.06em;
+  background: linear-gradient(100deg, var(--accent-light), var(--accent) 45%, var(--accent-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.title {
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+}
+.lede,
+.section-lede {
+  font-size: clamp(18px, 1.4vw, 21px);
+  color: var(--muted);
+  margin: 0 0 36px;
+}
+.lede {
+  max-width: 36ch;
+}
+.section-lede {
+  max-width: 56ch;
+}
+
+.section {
+  width: min(100% - var(--gutter) * 2, var(--max));
+  margin-inline: auto;
+  padding-block: clamp(96px, 16vh, 180px);
+}

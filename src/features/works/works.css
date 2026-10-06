@@ -1,0 +1,174 @@
+.works {
+  padding-bottom: clamp(64px, 10vh, 120px);
+}
+/* Pinned like the approach section: the frame sticks while every project gets a slice of scroll. */
+@media (min-width: 961px) {
+  .works {
+    height: calc(100svh + var(--works-count) * 40svh);
+    padding-block: 0;
+  }
+  .works__sticky {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100svh;
+    padding-top: 72px;
+  }
+  .works__sticky .view--cards {
+    flex: 0 1 auto;
+    height: clamp(300px, 50svh, 560px);
+  }
+}
+.works__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0 40px;
+}
+.works__hint {
+  margin: 0 0 30px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.view--cards {
+  height: clamp(420px, 64svh, 640px);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  outline-offset: -10px;
+}
+.view--cards.is-hovering {
+  cursor: pointer;
+}
+.view--cards.is-dragging {
+  cursor: grabbing;
+}
+.works__stage {
+  position: relative;
+}
+/* The carousel reports where its centred card ends, so the button always hangs right under it. */
+.works__link {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, var(--works-link-y, 0px));
+}
+.works__link[aria-disabled='true'] {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.works__caption {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  max-width: 760px;
+  margin: 8px auto 0;
+  text-align: center;
+}
+.works__count {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.works__title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 6px 0;
+}
+.works__desc {
+  margin: 0 auto 10px;
+  max-width: 46ch;
+  color: var(--muted);
+}
+.works__nav {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+}
+.works__nav:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.works__nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.works__item h3 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  margin: 6px 0;
+}
+.works__item p {
+  margin: 0 0 8px;
+  color: var(--muted);
+}
+.works__meta {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .works__caption {
+    grid-template-columns: 44px 1fr 44px;
+    gap: 12px;
+  }
+  .works__nav {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Without WebGL the carousel is gone: the screen-reader list becomes the visible grid of projects. */
+.no-webgl .works__hint,
+.no-webgl .works__link,
+.no-webgl .works__caption {
+  display: none;
+}
+.no-webgl .works {
+  height: auto;
+}
+.no-webgl .works__sticky {
+  position: static;
+  height: auto;
+  padding-top: 0;
+}
+.no-webgl .works__list {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+.no-webgl .works__item {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}

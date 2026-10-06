@@ -1,0 +1,91 @@
+/* Mirrors the BackToTop component in the tudugroup web app; only brand colours are swapped for the accent. */
+.back-to-top {
+  --ring: 0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent);
+  --shadow:
+    0 10px 15px -3px color-mix(in srgb, var(--accent) 25%, transparent),
+    0 4px 6px -4px color-mix(in srgb, var(--accent) 25%, transparent);
+
+  --edge: 16px;
+
+  position: fixed;
+  right: var(--edge);
+  bottom: calc(var(--edge) + var(--dock-space));
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--ring), var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.75);
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out,
+    visibility 0.3s ease-out,
+    background-color 0.3s ease-out,
+    box-shadow 0.3s ease-out;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.back-to-top.is-visible:hover {
+  --shadow:
+    0 20px 25px -5px color-mix(in srgb, var(--accent) 35%, transparent),
+    0 8px 10px -6px color-mix(in srgb, var(--accent) 35%, transparent);
+  transform: translateY(-4px);
+  background: var(--accent-deep);
+}
+.back-to-top.is-visible:active {
+  transform: scale(0.95);
+}
+.back-to-top:focus-visible {
+  outline: none;
+  --ring: 0 0 0 4px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.back-to-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.back-to-top__track {
+  stroke: rgba(255, 255, 255, 0.25);
+}
+.back-to-top__progress {
+  stroke: #fff;
+}
+.back-to-top__arrow {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s;
+}
+.back-to-top:hover .back-to-top__arrow {
+  transform: translateY(-2px);
+}
+
+@media (min-width: 640px) {
+  .back-to-top {
+    --edge: 24px;
+  }
+}
+@media (min-width: 1024px) {
+  .back-to-top {
+    --edge: 40px;
+  }
+}
+@media print {
+  .back-to-top {
+    display: none;
+  }
+}

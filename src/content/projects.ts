@@ -1,0 +1,58 @@
+import type { Project } from './types.ts';
+
+export const projects: Project[] = [
+  {
+    title: 'Realtime Voice Rooms',
+    year: '2026',
+    type: 'Web app',
+    description: 'Group chat and voice channels on WebRTC, built for small communities.',
+    tags: ['WebRTC', 'Supabase', 'React'],
+    color: '#3d5a80',
+    url: null,
+  },
+  {
+    title: 'Analytics Dashboard',
+    year: '2025',
+    type: 'SaaS',
+    description: 'Dense data made readable: live charts, saved views and one-click exports.',
+    tags: ['TypeScript', 'D3', 'Postgres'],
+    color: '#4a6b52',
+    url: null,
+  },
+  {
+    title: 'Commerce Theme',
+    year: '2025',
+    type: 'E-commerce',
+    description: 'A fast storefront theme with motion that never gets in the way of checkout.',
+    tags: ['Shopify', 'Liquid', 'GSAP'],
+    color: '#8a4b3a',
+    url: null,
+  },
+  {
+    title: 'Learning Platform',
+    year: '2024',
+    type: 'Platform',
+    description: 'Courses, progress tracking and an admin that non-developers enjoy using.',
+    tags: ['Next.js', 'NestJS', 'Nx'],
+    color: '#5b4a7a',
+    url: null,
+  },
+  {
+    title: 'Product Configurator',
+    year: '2024',
+    type: '3D / WebGL',
+    description: 'Real-time 3D product customisation that becomes interactive in under two seconds.',
+    tags: ['Three.js', 'GLTF', 'Vite'],
+    color: '#2f6f73',
+    url: null,
+  },
+  {
+    title: 'Studio Website',
+    year: '2023',
+    type: 'Marketing',
+    description: 'Editorial layout, smooth scroll and a CMS the team actually keeps updated.',
+    tags: ['Astro', 'Lenis', 'Headless CMS'],
+    color: '#7a6a3a',
+    url: null,
+  },
+];
